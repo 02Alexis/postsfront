@@ -18,10 +18,10 @@ function Navbar() {
             <Link href="#">Crear publicación</Link>
           </li>
           <li className="px-3 py-1">
-            <Link href="#">Login</Link>
+            <Link href="/login">Login</Link>
           </li>
           <li className="px-3 py-1">
-            <Link href="#">Registro</Link>
+            <Link href="/registration">Registro</Link>
           </li>
         </ul>
       </div>

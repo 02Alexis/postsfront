@@ -1,8 +1,8 @@
-// import PostCart from "@/components/PostCart";
 import PostCart from "@/components/PostCart";
-import React, { useState } from "react";
 
 async function loaderPost() {
+
+  
   // ejecuta una petición
   const res = await fetch("http://localhost:8000/posts/");
   // convierte los datos en json
