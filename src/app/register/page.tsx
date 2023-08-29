@@ -3,7 +3,7 @@ import LoginInput from "@/components/LoginInput";
 import { useState } from "react";
 
 
-function Registration() {
+function RegisterPage() {
     const [imguser, setImguser] = useState<string>("");
     const [nameuser, setNameuser] = useState<string>("");
     const [username, setUsername] = useState<string>("");
@@ -51,4 +51,4 @@ function Registration() {
   )
 }
 
-export default Registration
+export default RegisterPage

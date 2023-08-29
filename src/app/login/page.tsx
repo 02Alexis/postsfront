@@ -3,7 +3,7 @@
 import LoginInput from "@/components/LoginInput";
 import { useState } from "react";
 
-function Login() {
+function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -44,4 +44,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

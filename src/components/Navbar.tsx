@@ -21,7 +21,7 @@ function Navbar() {
             <Link href="/login">Login</Link>
           </li>
           <li className="px-3 py-1">
-            <Link href="/registration">Registro</Link>
+            <Link href="/register">Registro</Link>
           </li>
         </ul>
       </div>
