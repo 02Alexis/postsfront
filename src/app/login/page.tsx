@@ -1,6 +1,5 @@
 "use client";
 
-import LoginInput from "@/components/LoginInput";
 import { useState } from "react";
 
 function LoginPage() {
@@ -19,17 +18,6 @@ function LoginPage() {
             {/* <p className="text-sm text-red-500 font-medium -mt-4">
             * Error: 
           </p> */}
-            <LoginInput
-              label="Email"
-              value={email}
-              onChange={setEmail}
-            />
-            <LoginInput
-              label="Password"
-              type="password"
-              value={password}
-              onChange={setPassword}
-            />
           </div>
           <button
             type="submit"
