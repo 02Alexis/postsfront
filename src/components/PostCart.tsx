@@ -48,6 +48,51 @@ function PostCart({ post }) {
     }
   };
 
+  const handleDeletePost = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/posts/${post._id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${session.data.user.token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Realizar alguna acción si es necesario, como refrescar la lista de publicaciones
+        window.location.reload(); // Recargar la página después de eliminar
+      } else {
+        console.error("Error al eliminar el post:", response.statusText);
+        alert("No estás autorizado para eliminar este post."); // Mostrar la alerta
+      }
+    } catch (error) {
+      console.error("Error al eliminar el post:", error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/posts/${post._id}/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${session.data.user.token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        // Realizar alguna acción si es necesario, como refrescar la lista de comentarios
+        window.location.reload(); // Recargar la página después de eliminar el comentario
+      } else {
+        console.error("Error al eliminar el comentario:", response.statusText);
+        alert("No estás autorizado para eliminar este comentario."); // Mostrar la alerta
+      }
+    } catch (error) {
+      console.error("Error al eliminar el comentario:", error);
+    }
+  };
+
   return (
     <div className="border bg-white rounded-xl mb-4">
       <div className="flex items-center justify-between p-2.5">
@@ -60,7 +105,10 @@ function PostCart({ post }) {
             <p style={{ fontSize: 12 }}>{post.title}</p>
           </div>
         </div>
-        <IoEllipsisHorizontalSharp className="text-lg mr-2 cursor-pointer" />
+        <IoEllipsisHorizontalSharp
+          onClick={handleDeletePost}
+          className="text-lg mr-2 cursor-pointer"
+        />
       </div>
       <div className="w-full bg-neutral-200">
         <Link href={`${post._id}`}>
@@ -104,6 +152,11 @@ function PostCart({ post }) {
                 </p>
                 <p>{comment.text}</p>
               </div>
+              <IoEllipsisHorizontalSharp
+                onClick={() => handleDeleteComment(comment._id)}
+                style={{ fontSize: 11.3 }}
+                className="text-lg mr-2 cursor-pointer"
+              />
             </div>
           </div>
         ))}
