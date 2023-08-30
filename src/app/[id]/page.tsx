@@ -39,7 +39,7 @@ async function DetailPost({ params }) {
                 </div>
                 <div className="ml-2.5 text-black">
                   <p className="font-medium text-sm">{post.userName}</p>
-                  <p style={{ fontSize: 12 }}>crack</p>
+                  <p style={{ fontSize: 12 }}>{post.title}</p>
                 </div>
               </div>
               <IoEllipsisHorizontalSharp className="text-lg mr-2 cursor-pointer" />
@@ -73,6 +73,25 @@ async function DetailPost({ params }) {
                 {formatDate(post.createdAt)}
               </p>
             </div>
+            {post.comments &&
+              post.comments.map((comment) => (
+                <div key={comment._id} className="">
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 bg-neutral-200 rounded-full">
+                      <img src={comment.userImage} className="rounded-full" />
+                    </div>
+                    <div className="ml-2.5">
+                      <p
+                        style={{ fontSize: 11.3 }}
+                        className="font-medium text-sm"
+                      >
+                        {comment.userName} {formatDate(comment.createdAt)}
+                      </p>
+                      <p>{comment.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             <div className="border-t p-3 text-sm flex items-center justify-between space-x-3">
               <IoHappyOutline className="text-2xl" />
               <input
@@ -85,25 +104,6 @@ async function DetailPost({ params }) {
               </div>
             </div>
           </div>
-
-          <div className="border bg-white rounded-xl mb-4"></div>
-          {post.comments &&
-            post.comments.map((comment) => (
-              <div key={comment._id} className=" text-white">
-                <div className="flex items-center">
-                  <div className="h-10 w-10 bg-neutral-200 rounded-full">
-                    <img src={comment.userImage} className="rounded-full" />
-                  </div>
-                  <div className=" pl-2">
-                    <p className="font-medium text-sm">{comment.userName}</p>
-                    <p>{comment.text}</p>
-                    <p style={{ fontSize: 12 }}>
-                      Fecha de creación: {formatDate(comment.createdAt)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
         </div>
       </div>
     </main>

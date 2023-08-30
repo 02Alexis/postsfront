@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { useState } from "react";
@@ -39,6 +39,7 @@ function PostCart({ post }) {
       if (response.ok) {
         // Realizar alguna acción si es necesario, como refrescar la lista de comentarios
         setCommentText(""); // Limpiar el campo de texto después de enviar el comentario
+        window.location.reload();
       } else {
         console.error("Error al enviar el comentario:", response.statusText);
       }
@@ -56,7 +57,7 @@ function PostCart({ post }) {
           </div>
           <div className="ml-2.5 text-black">
             <p className="font-medium text-sm">{post.userName}</p>
-            <p style={{ fontSize: 12 }}>crack</p>
+            <p style={{ fontSize: 12 }}>{post.title}</p>
           </div>
         </div>
         <IoEllipsisHorizontalSharp className="text-lg mr-2 cursor-pointer" />
@@ -90,6 +91,22 @@ function PostCart({ post }) {
           {formatDate(post.createdAt)}
         </p>
       </div>
+      {post.comments &&
+        post.comments.map((comment) => (
+          <div key={comment._id} className="">
+            <div className="flex items-center">
+              <div className="h-10 w-10 bg-neutral-200 rounded-full">
+                <img src={comment.userImage} className="rounded-full" />
+              </div>
+              <div className="ml-2.5">
+                <p style={{ fontSize: 11.3 }} className="font-medium text-sm">
+                  {comment.userName} {formatDate(comment.createdAt)}
+                </p>
+                <p>{comment.text}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       <div className="border-t p-3 text-sm flex items-center justify-between space-x-3">
         <IoHappyOutline className="text-2xl" />
         <input
