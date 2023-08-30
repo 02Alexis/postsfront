@@ -9,7 +9,7 @@ async function Navbar() {
     <nav className="bg-gray-900 p-4 text-white">
       <div className="flex justify-between container mx-auto">
         <Link href="/">
-          <h1 className="font-bold text-xl">Logo</h1>
+          <h1 className="font-bold text-xl">Home</h1>
         </Link>
 
         <ul className="flex gap-x-2">
@@ -20,6 +20,9 @@ async function Navbar() {
               </li>
               <li className="px-3 py-1">
                 <Link href="/agregarFeed">Crear publicación</Link>
+              </li>
+              <li className="px-3 py-1">
+                <Link href="/api/auth/signout">Sign out</Link>
               </li>
             </>
           ) : (
