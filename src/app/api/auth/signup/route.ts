@@ -1,4 +1,3 @@
-// route.ts
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
@@ -18,7 +17,7 @@ export async function POST(request: Request) {
   }
 
   try {
-        const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const userData = {
       image_url,
@@ -44,14 +43,14 @@ export async function POST(request: Request) {
       return NextResponse.error();
     }
   } catch (error) {
-    console.log(error);
+    console.log("error bobo", error);
     if (error instanceof Error) {
       return NextResponse.json(
         {
-            message: error.message,
+          message: error.message,
         },
         {
-            status: 400,
+          status: 400,
         }
       );
     }

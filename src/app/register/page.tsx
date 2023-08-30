@@ -1,21 +1,38 @@
 "use client";
 import axios, { AxiosError } from "axios";
 import { FormEvent, useState } from "react";
+import { signIn } from "next-auth/react";
+import {useRouter} from "next/navigation"
 
 function RegisterPage() {
+
   const [error, setError] = useState();
+  const router = useRouter()
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
     try {
-      const res = await axios.post("/api/auth/signup", {
+      const signupResponse = await axios.post("/api/auth/signup", {
         image_url: formData.get("image_url"),
         name: formData.get("name"),
         email: formData.get("email"),
         password: formData.get("password"),
       });
+
+      console.log(signupResponse);
+
+      const res = await signIn("credentials", {
+        email: signupResponse.data.email,
+        password: formData.get("password"),
+        redirect: false,
+      });
       console.log(res);
+
+      if (res?.ok) return router.push("/dashboard/profile")
+      
+
     } catch (error) {
       console.log(error);
 
@@ -34,9 +51,6 @@ function RegisterPage() {
             <p>Crear cuenta</p>
           </div>
           <div className="flex flex-col space-y-2 mb-4">
-            {/* <p className="text-sm text-red-500 font-medium -mt-4">
-            * Error: 
-          </p> */}
             <input
               type="text"
               placeholder="image url"
