@@ -1,4 +1,8 @@
+"use client"
+
 import Link from "next/link";
+import React, { useState } from "react";
+import { useSession } from "next-auth/react";
 import {
   IoHeartOutline,
   IoPaperPlaneOutline,
@@ -15,6 +19,34 @@ function formatDate(dateString) {
 }
 
 function PostCart({ post }) {
+  const [commentText, setCommentText] = useState("");
+  const session = useSession();
+
+  const handlePostComment = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/posts/${post._id}/comment`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.data.user.token}`,
+          },
+          body: JSON.stringify({ text: commentText }),
+        }
+      );
+
+      if (response.ok) {
+        // Realizar alguna acción si es necesario, como refrescar la lista de comentarios
+        setCommentText(""); // Limpiar el campo de texto después de enviar el comentario
+      } else {
+        console.error("Error al enviar el comentario:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al enviar el comentario:", error);
+    }
+  };
+
   return (
     <div className="border bg-white rounded-xl mb-4">
       <div className="flex items-center justify-between p-2.5">
@@ -64,8 +96,15 @@ function PostCart({ post }) {
           type="text"
           className="outline-none block flex-1"
           placeholder="Add a comment"
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
         />
-        <div className="text-blue-400 font-bold mr-1 cursor-pointer">Post</div>
+        <div
+          className="text-blue-400 font-bold mr-1 cursor-pointer"
+          onClick={handlePostComment}
+        >
+          Post
+        </div>
       </div>
     </div>
   );
