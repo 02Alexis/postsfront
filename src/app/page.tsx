@@ -1,4 +1,5 @@
 import PostCart from "@/components/PostCart";
+import Suggestions from "@/components/Suggestions";
 
 async function loaderPost() {  
   // ejecuta una petición
@@ -22,6 +23,9 @@ async function HomePage() {
           ))}
 
           <div className="border bg-white rounded-xl mb-4"></div>
+        </div>
+        <div className="col-span-5">
+          <Suggestions />
         </div>
       </div>
     </main>
