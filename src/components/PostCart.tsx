@@ -12,13 +12,14 @@ import {
   IoHappyOutline,
   IoHeart,
 } from "react-icons/io5";
+import { Post  } from "@/interface/types";
 
-function formatDate(dateString) {
+function formatDate(dateString: string) {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-function PostCart({ post }) {
+function PostCart({ post }: { post: Post }) {
   const [commentText, setCommentText] = useState("");
   const session = useSession();
 
@@ -69,7 +70,7 @@ function PostCart({ post }) {
     }
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (commentId: string) => {
     try {
       const response = await fetch(
         `http://localhost:8000/posts/${post._id}/comments/${commentId}`,

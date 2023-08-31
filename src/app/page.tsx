@@ -1,5 +1,6 @@
 import PostCart from "@/components/PostCart";
-import Suggestions from "@/components/Suggestions";
+import { Post } from "@/interface/types";
+// import Suggestions from "@/components/Suggestions";
 
 async function loaderPost() {  
   // ejecuta una petición
@@ -12,20 +13,24 @@ async function loaderPost() {
   return data;
 }
 
+// interface Props {
+//   post: Post;
+// }
+
 async function HomePage() {
-  const posts = await loaderPost();
+  const posts: Post[] = await loaderPost();
   return (
     <main className="py-6 px-4 mx-auto" style={{ maxWidth: 840 }}>
       <div className="grid grid-cols-12 gap-10">
         <div className="col-span-7">
           {posts.map((post) => (
-            <PostCart post={post} key={post.id} />
+            <PostCart post={post} key={post._id} />
           ))}
 
           <div className="border bg-white rounded-xl mb-4"></div>
         </div>
         <div className="col-span-5">
-          <Suggestions />
+          {/* <Suggestions /> */}
         </div>
       </div>
     </main>

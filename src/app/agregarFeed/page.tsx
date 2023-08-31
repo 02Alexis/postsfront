@@ -19,7 +19,7 @@ function CreatePost() {
   const router = useRouter();
   const session = useSession();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // console.log(session);
@@ -42,9 +42,11 @@ function CreatePost() {
         );
         // console.log(session.data.user.token);
 
-      console.log(response.data);
-      // Manejar la respuesta exitosa si es necesario
-      router.push("/"); // Redirigir a la página deseada después de crear el post
+   // Agregar la nueva publicación a la lista actual de publicaciones
+   addNewPost(response.data); // Llama a una función que actualiza la lista de publicaciones
+   setTitle("");
+   setDescription("");
+   setImageUrl("");
     } catch (error) {
       console.error("Error al crear el post:", error);
       setError("Error al crear el post");

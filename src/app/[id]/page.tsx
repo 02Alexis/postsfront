@@ -2,13 +2,11 @@ import {
   IoHeartOutline,
   IoPaperPlaneOutline,
   IoBookmarkOutline,
-  IoEllipsisHorizontalSharp,
   IoChatbubbleOutline,
-  IoHappyOutline,
-  IoHeart,
+    IoHeart,
 } from "react-icons/io5";
 
-async function loadPost(id) {
+async function loadPost(id: string) {
   // ejecuta una petición
   const res = await fetch(`http://localhost:8000/posts/${id}`);
   // convierte los datos en json
@@ -19,7 +17,7 @@ async function loadPost(id) {
   return data;
 }
 
-function formatDate(dateString) {
+function formatDate(dateString: string) {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
@@ -42,7 +40,6 @@ async function DetailPost({ params }) {
                   <p style={{ fontSize: 12 }}>{post.title}</p>
                 </div>
               </div>
-              <IoEllipsisHorizontalSharp className="text-lg mr-2 cursor-pointer" />
             </div>
             <div className="w-full bg-neutral-200">
               <img src={post.image_url} alt="" className="w-full h-full" />
@@ -92,17 +89,6 @@ async function DetailPost({ params }) {
                   </div>
                 </div>
               ))}
-            <div className="border-t p-3 text-sm flex items-center justify-between space-x-3">
-              <IoHappyOutline className="text-2xl" />
-              <input
-                type="text"
-                className="outline-none block flex-1"
-                placeholder="Add a comment"
-              />
-              <div className="text-blue-400 font-bold mr-1 cursor-pointer">
-                Post
-              </div>
-            </div>
           </div>
         </div>
       </div>
